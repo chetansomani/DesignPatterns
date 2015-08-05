@@ -1,0 +1,40 @@
+//Mediator Design Pattern
+public class Stock{
+	
+}
+
+public abstract class colleague{
+	Mediator stckMediator;
+
+	colleague(Mediator stckMed){
+		stckMediator = stckMed;
+	}
+
+	//fnction similar to interface mediator
+}
+
+class officeColleague extends colleague{
+	officeColleague(Mediator media){
+		super(media);
+	}
+}
+
+class nonOfficeColleague extends colleague{
+	nonOfficeColleague(Mediator colmedia){
+		super(colmedia);
+	}
+}
+
+interface mediator{
+	//set of functions
+}
+
+public class stockMediator implements mediator{
+	ArrayList<colleague> listColleagues;
+
+	stockMediator(){
+		listColleagues = new ArrayList<colleague>();
+	}
+
+	//implementation of those functions
+}

@@ -1,0 +1,56 @@
+//FlyWeight Design Pattern - USed to Increase speed of execution of code by sharing of objects based on specific parameter rather creating a new object each time
+
+public class Rectangle{
+	Color color;
+	int height;
+	int width;
+
+	public Rectangle(Color color, int height, int width){
+		this.color = color;
+		this.height = height;
+		this.width = width;
+	}
+
+	public void drawRectangle(){
+		System.out.println("Rectangle Specifications");
+		System.out.println(color.returnColor());
+		System.out.println(height);
+		System.out.println(width);
+	}
+}
+
+
+public class Color{
+	string[] colors = new string[]{
+		"Red","Black","Orange"
+	};
+
+	public string returnColor(){
+		return colors[getRandom(3)];
+	}
+}
+
+public class RectangleFactory{
+
+	public static HashMap<String, Rectangle> chkRect = new HashMap<String, Rectangle>();
+
+	public Rectangle getRectangle(){
+		Color color = new Color();
+		string colorString = color.returnColor();
+		if(chkRect[colorString] == null){
+			return new Rectangle(color, getRandom(100), getRandom(200));
+		}else{
+			return (Rectangle)chkRect.get(colorString);
+		}
+	}
+}
+
+class Program{
+	static void main(string[] args){
+		RectangleFactory rctFct = new RectangleFactory();
+		for(int i=0; i< 10000l i++){
+			Rectangle rect = rctFct.getRectangle();
+			rect.drawRectangle();
+		}
+	}
+}

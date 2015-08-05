@@ -1,0 +1,72 @@
+//State Design Pattern - IT IS USED WHEN YOU HAVE DIFFERENT STATES/CONDITIONS IN A SCENARIO THAT NEEDS TO BE EXECUTED. SAY, YOU HAVE 3 STATES/CONDITIONS AND ALL THE CONDITIONS HAVE SIMILAR SET OF OPERATIONS TO PERFORM BUT WITH DIFFERENT EXECUTION LOGIC. SO, NAVIGATION AMONG THESE CONDITIONS CAN BE EASILY FACILITATED USING STATE DESIGN PATTERN.
+Ex: In AtmMachine, first state will be NoCard, once the user has entered the card in the machine, then the state needs to be changed. IF the user tries to withdraw a balance, and if the user has no balance, the state will change to NOBALANCE and etc. So, once a new state is on hold, the set of methods for that state is similar to the previous state, the only thing that differs is the execution logic for that state within that method.
+class ATMMachine{
+	stateExecution NoCard;
+	stateExecution NoBalance;
+	stateExecution balanceOut;
+
+	public ATMMachine(){
+		NoCard = new NOCARD();
+		noBal = new NOBALANCE();
+		balanceOut = new BALANCEOUT();
+	}	
+
+	
+
+}
+
+
+interface stateExecution{
+	
+	void checkCard();
+
+	void checkBalance();
+
+	void inputBalance();
+
+}
+
+
+
+
+class NOCARD implements stateExecution{
+	public void checkCard(){
+		// TO DO
+	}
+
+	public void checkBalance(){
+		//TO DO
+	}
+
+	public void inputBalance(){
+		//TO DO
+	}
+}
+
+class NOBALANCE implements stateExecution{
+	public void checkCard(){
+		// TO DO
+	}
+
+	public void checkBalance(){
+		//TO DO
+	}
+
+	public void inputBalance(){
+		//TO DO
+	}
+}
+
+class BALANCEOUT implements stateExecution{
+	public void checkCard(){
+		// TO DO
+	}
+
+	public void checkBalance(){
+		//TO DO
+	}
+
+	public void inputBalance(){
+		//TO DO
+	}
+}

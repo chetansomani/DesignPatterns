@@ -1,0 +1,80 @@
+//Visitor Pattern
+interface ItemTax{
+	void acceptTaxVisitor(TaxVisitors tax);
+}
+
+interface TaxVisitors{
+	
+	void getTax(item1 item);
+
+	void getTax(item2 item);
+
+	void getTax(item3 item);
+
+}
+
+class TaxMan implements TaxVisitors{
+	
+	public void getTax(item1 item){
+		System.out.println(item.getPrice() * 0.45);
+	}
+
+	public void getTax(item2 item){
+		System.out.println(item.getPrice() * 0.75);
+	}
+
+	public void getTax(item3 item){
+		System.out.println(item.getPrice() * 0.95);
+	}
+}
+
+
+class item1 implements ItemTax{
+	int price;
+
+	item1(int p){
+		this.price = p;
+	}
+
+	public int getPrice(){
+		return price;
+	}
+
+	public void acceptTaxVisitor(TaxVisitors tax){
+		tax.getTax(this);
+	}
+
+}
+
+class item2 implements ItemTax{
+	int price;
+
+	item1(int p){
+		this.price = p;
+	}
+
+	public int getPrice(){
+		return price;
+	}
+
+	public void acceptTaxVisitor(TaxVisitors tax){
+		tax.getTax(this);
+	}
+}
+
+
+class item3 implements ItemTax{
+	int price;
+
+	item1(int p){
+		this.price = p;
+	}
+
+	public int getPrice(){
+		return price;
+	}
+
+	public void acceptTaxVisitor(TaxVisitors tax){
+		tax.getTax(this);
+	}
+}

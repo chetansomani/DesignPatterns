@@ -1,0 +1,181 @@
+//Behavioural Design Patterns
+//Chain of Responsibility - USed when you have serious of commands of different objects that needs to be executed based on a condition being satisfied. SO, based on a condition a command will be executed if not it will be delegated to next object. In simpler terms, its all about delegation based on condition.
+
+abstract class CRHandler{
+	
+	CRHandler delegate;
+
+	abstract void executeCommand(bool cond);
+
+	void setDelegates(CRHandler delegate){
+		this.delegate = delegate;
+	}
+}
+
+class delegate1 : CRHandler{
+	public override void executeCommand(bool cond){
+		if(cond){
+			System.out.println("Delegate 1");
+		}else{
+			delegate.executeCommand(cond);
+		}
+	}
+}
+
+class delegate2: CRHandler{
+	public override void executeCommand(bool cond){
+		if(cond){
+			System.out.println("Delegate 2");
+		}else{
+			delegate.executeCommand(cond);
+		}
+	}
+}
+
+public class Program{
+	static void main(string[] args){
+		CRHandler delegate1 = new delegate1();
+		CRHandler delegate2 = new delegate2();
+
+		delegate1.setDelegates(delegate1);
+
+		delegate1.executeCommand(false);
+		delegate2.executeCommand(true);
+	}
+}
+
+//Example - Wending Machine
+abstract class coinHandler{
+	coinHandler ckHandler;
+	abstract void checkCoin(Coin coin);
+	public void setSuccesor(coinHandler ckHandler){
+		this.ckHandler = ckHandler;
+	}
+}
+
+class 5Coin : coinHandler{
+	public override void checkCoin(Coin coin){
+		if(coin.dimensions == 5){
+			System.out.println("five cent coin");
+		}else{
+			ckHandler.checkCoin(coin);
+		}
+	}
+}
+
+class 10Coin : coinHandler{
+	public override void checkCoin(Coin coin){
+		if(coin.dimensions == 10){
+			System.out.println(" 10 cent coin");
+		}else{
+			ckHandler.checkCoin(coin);
+		}
+	}
+}
+
+public class Coin{
+	int dimensions{
+		get;
+		set;
+	}
+}
+
+
+public class Program{
+	static void main(string[] args){
+		coinHandler chk5 = new 5Coin();
+		coinHandler chk10 = new 10Coin();
+
+		Coin ck = new Coin();
+		ck.dimensions = 10;
+
+		chk5.setSuccessor(chk10);
+		chk5.checkCoin(ck);
+		chk10.checkCoin(ck);
+	}
+}
+
+
+//Commander Behavioural Pattern
+class Receiver{
+	public void action(string message){
+		System.out.println("Executing action" + message);
+	}		
+}
+
+abstract class commandHandler{
+	Receiver rec;
+	public commandHandler(Receiver rec){
+		this.rec = rec;
+	}
+	abstract void command(string message);
+}
+
+class command1{
+	public override void command(string message){
+		rec.action(message);
+	}
+}
+
+class Invoker{
+	commandHandler command{get; set;}
+	public void executeCommand(string message){
+		command.command(message);
+	}
+}
+
+class client{
+	static void main(string[] args){
+		var Invoker = new Invoker();
+		var rec = new Receiver();
+		var command = new command1(rec);
+		Invoker.command = command;
+		Invoker.executeCommand("Hello");
+	}
+}
+
+//Example - Robot Movement
+class RobotAction{
+	public void executeAction(string message){
+		System.out.println("Executing Robot Action" + message);
+	}
+}
+
+abstract class RobotHandler{
+	RobotAction rbtAction;
+
+	public RobotHandler(RobotAction actn){
+		this.rbtAction = actn;
+	}	
+
+	abstract void setActions();
+}
+
+class MoveAction: RobotHandler{
+	public override void setActions(){
+		rbtAction.executeAction("Move Forward");
+	}
+}
+
+class SpeakAction: RobotHandler{
+	public override void setActions(){
+		rbtAction.executeAction("Speak Action");
+	}
+}
+
+class RobotInvoker{
+	RobotHandler rbtHandler{get; set;}
+	public void executeInvoker(RobotHandler rbtHandler){
+		rbtHandler.setActions();
+	}
+}
+
+class client{
+	static void main(string[] args){
+	   var Invoker = new RobotInvoker();
+	   var Receiver = new RobotAction();
+	   var command = new MoveAction(Receiver);
+	   Invoker.command = command;
+	   Invoker.executeInvoker(command);
+	}
+}

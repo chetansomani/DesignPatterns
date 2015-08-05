@@ -1,0 +1,88 @@
+//Proxy Design Pattern - It is used when you don't want to expose a class to the outside world. In order to do that, you create a proxy class and an interface and the interface is implemented by both the proxy class and the actual class. Actual class object is then called within the methods being implemented by the proxy class.
+
+interface AccountDetails
+{
+	void getCash();
+
+	void getAccountDetails();
+
+	void depositCash();
+}
+
+class SavingsAccount implements AccountDetails{
+	public void getCash(){
+		//
+	}
+
+	public void getAccountDetails(){
+		//
+	}
+
+	public void depositCash(){
+		//
+	}
+}
+
+class CheckingAccount implements AccountDetails{
+	public void getCash(){
+		//
+	}
+
+	public void getAccountDetails(){
+		//
+	}
+
+	public void depositCash(){
+		//
+	}
+}
+
+
+public class Bank implements getBankDetails{
+	AccountDetails savAccount;
+	AccountDetails chkAccount;
+	Bank(){
+		savAccount = new SavingsAccount();
+		chkAccount = new CheckingAccount();
+	}
+
+	public void getCashDetails(){
+		System.out.println(savAccount.getCash() + "" + chkAccount.getCash());
+	}
+
+	public void getAccountDetails(){
+		System.out.println(savAccount.getAccountDetails() + "" + chkAccount.getAccountDetails());
+	}
+
+}
+
+
+//Creating a proxy class for Bank
+public class proxyBank implements getBankDetails{
+	public void getCashDetails(){
+		Bank nwBnk = new Bank();
+		nwBnk.getCashDetails();
+	}
+
+	public void getAccountDetails(){
+		Bank nwBnk = new Bank();
+		nwBnk.getAccountDetails();
+	}
+}
+
+
+class Program{
+	static void main(string[] args){
+		getBankDetails proxyBank = new proxyBank();
+		proxyBank.getCashDetails();
+		proxyBank.getAccoutDetails();
+	}
+}
+
+
+//Creating an interface which acts as a interactive layer
+interface getBankDetails{
+	void getCashDetails();
+
+	void getAccountDetails();
+}

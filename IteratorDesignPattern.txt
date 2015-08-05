@@ -1,0 +1,113 @@
+//Iterator Pattern
+public class Notification{
+	
+	 int userID;
+
+	 public int UserID{
+	 	get{ return userID;}
+	 	set{ userID = value;}
+	 }
+
+	 String userName;
+
+	 public String UserName{
+	 	get{ return userName; };
+	 	set{ userName = value; };
+	 } 
+
+	 public Notification(int userId, String userName){
+	 	this.UserID = userId;
+	 	this.UserName = userName;
+	 }
+}
+
+
+public EmailNotificationUsers{
+		
+		ArrayList<Notification> userNotifs;
+
+		public EmailNotificationUsers(){
+			userNotifs = new ArrayList<Notification>();
+			addUserList(1, "lucky");
+			addUserList(2, "Roman");
+			addUserList(3, "Diana");
+		}
+		
+		void addUserList(int id, string name){
+			userNotifs.Add(new Notification(id,name));
+		}
+
+		public Iterator createIterator(){
+			return userNotifs.iterator();
+		}
+}
+
+public MessageNotificationUsers : getIterator{ 
+		
+		Notification[] userNotifs;
+		int arrVal = 0;
+
+		public EmailNotificationUsers(){
+			userNotifs = new Notification[3];
+			addUserList(4, "luckyN");
+			addUserList(5, "RomanN");
+			addUserList(6, "DianaN");
+		}
+		
+		void addUserList(int id, string name){
+			userNotifs[arrVal] = new Notification(id, name);
+			arrVal++;
+		}
+
+		public Iterator createIterator(){
+			return Arrays.asList(userNotifs).iterator();
+		}
+}
+
+public interface getIterator{
+	
+	Iterator createIterator();
+
+}
+
+public class getNotificationList{
+	
+	getIterator emailIterator;
+	getIterator messageIterator;
+
+	public getNotificationList(getIterator chkList, getIterator chkList2){
+		this.emailIterator = chkList;
+		this.messageIterator = chkList2;
+	}
+
+    public void printValues(){
+    	Iterator email = emailIterator.createIterator();
+    	Iterator message = messageIterator.createIterator();
+
+    	System.out.println("Email Registered Users");
+    	getValues(email);
+
+    	System.out.println("Message Registered Users");
+    	getValues(message);
+    }
+
+
+    void getValues(Iterator valIterator){
+    	while(valIterator.hasnext()){
+    		System.out.println(valIterator.id);
+    		System.out.println(valiterator.name);
+    	}
+    }
+}
+
+class Program{
+	static void main(string[] args){
+		getIterator email = new EmailNotificationUsers();
+		getIterator message = new MessageNotificationUsers();
+
+		getNotificationList gtList = new getNotificationList(email, message);
+
+		gtList.printValues();	
+
+	}
+}
